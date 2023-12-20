@@ -1,6 +1,7 @@
 #ifndef _GAUSS_H
 #define _GAUSS_H
 
+#include <stdlib.h>
 #include "mat_io.h"
 
 /**
