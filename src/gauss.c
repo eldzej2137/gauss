@@ -42,13 +42,15 @@ int eliminate(Matrix *mat, Matrix *b){
 		if (ext->data[i][i]==0)
 			return 1;
 		else {
-			int coeff;
+			double subtract;
 			for (ir=i+1; ir<ext->r; ir++){
-				coeff=ext->data[ir][i] / ext->data[i][i];
-				for (ic=i; ic<ext->c; ic++)
-					ext->data[ir][ic]-=coeff*ext->data[i][ic];
+				subtract=ext->data[ir][i];
+				for (ic=i; ic<ext->c; ic++){
+					ext->data[ir][ic]-=subtract;
+				}
 			}
 		}
+		free(tmp);
 	}
 	// teraz zamieniamy wartości w macierzach wejściowych (mat, b)
 	for (ir=0; ir<mat->r; ir++){
