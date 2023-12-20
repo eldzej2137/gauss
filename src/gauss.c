@@ -48,6 +48,7 @@ int eliminate(Matrix *mat, Matrix *b){
 			}
 		}
 	}
+	printToScreen(ext);
 	// teraz zamieniamy wartości w macierzach wejściowych (mat, b)
 	for (ir=0; ir<mat->r; ir++){
 		for (ic=0; ic<mat->c; ic++)
