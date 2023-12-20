@@ -42,9 +42,10 @@ int eliminate(Matrix *mat, Matrix *b){
 		if (ext->data[i][i]==0)
 			return 1;
 		else {
-		for (ir=i+1; ir<ext->r; ir++){
-			for (ic=i; ic<ext->c; ic++){
-				ext->data[ir][ic]-=ext->data[i][ic]*ext->data[ir][i]/ext->data[i][i];
+			for (ir=i+1; ir<ext->r; ir++){
+				for (ic=i; ic<ext->c; ic++){
+					ext->data[ir][ic]-=ext->data[i][ic]*ext->data[ir][i]/ext->data[i][i];
+				}
 			}
 		}
 	// teraz zamieniamy wartości w macierzach wejściowych (mat, b)
