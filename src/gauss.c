@@ -1,5 +1,6 @@
 #include "gauss.h"
 #include <math.h>
+#include <stdlib.h>
 
 /**
  * Zwraca 0 - elimnacja zakonczona sukcesem
@@ -36,16 +37,16 @@ int eliminate(Matrix *mat, Matrix *b){
 				ext->data[max_abs_index][ic]=tmp[ic];
 			}
 		}
-		free(tmp);
 		// teraz od każdego wiersza odejmujemy górny przemnożony przez
 		// odpowiednią wartość
 		if (ext->data[i][i]==0)
 			return 1;
 		else {
+			int coeff;
 			for (ir=i+1; ir<ext->r; ir++){
-				for (ic=i; ic<ext->c; ic++){
-					ext->data[ir][ic]-=ext->data[i][ic]*ext->data[ir][i]/ext->data[i][i];
-				}
+				coeff=ext->data[ir][i] / ext->data[i][i];
+				for (ic=i; ic<ext->c; ic++)
+					ext->data[ir][ic]-=coeff*ext->data[i][ic];
 			}
 		}
 	}
