@@ -39,15 +39,14 @@ int eliminate(Matrix *mat, Matrix *b){
 		free(tmp);
 		// teraz od każdego wiersza odejmujemy górny przemnożony przez
 		// odpowiednią wartość
+		if (ext->data[i][i]==0)
+			return 1;
+		else {
 		for (ir=i+1; ir<ext->r; ir++){
 			for (ic=i; ic<ext->c; ic++){
-				if (ext->data[i][i]!=0)
-					ext->data[ir][ic]-=ext->data[i][ic]*ext->data[ir][i]/ext->data[i][i];
-				else
-					return 1;
+				ext->data[ir][ic]-=ext->data[i][ic]*ext->data[ir][i]/ext->data[i][i];
 			}
 		}
-	}
 	// teraz zamieniamy wartości w macierzach wejściowych (mat, b)
 	for (ir=0; ir<mat->r; ir++){
 		for (ic=0; ic<mat->c; ic++)
@@ -57,4 +56,3 @@ int eliminate(Matrix *mat, Matrix *b){
 	
 	return 0;
 }
-
