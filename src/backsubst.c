@@ -7,7 +7,8 @@
  */
 int backsubst(Matrix *x, Matrix *mat, Matrix *b)
 {
-
+	if(mat->r != mat->c || x->c > 1 || x->r != mat->r || b->c != 1 || b->r != mat->r)
+		return 2;
 	int i, j;
 	double x_val;
 	for (i = x->r - 1; i >= 0; i--)
@@ -20,6 +21,8 @@ int backsubst(Matrix *x, Matrix *mat, Matrix *b)
 		}
 		// evaluating x by first adding b value of corresponding x and then dividing over element in diagonal
 		x_val += b->data[i][0];
+		if (mat->data[i][i] == 0)
+			return 1;
 		x_val /= mat->data[i][i];
 		x->data[i][0] = x_val;
 	}
