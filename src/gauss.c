@@ -38,27 +38,16 @@ int eliminate(Matrix *mat, Matrix *b){
 				ext->data[max_abs_index][ic]=tmp[ic];
 			}
 		}
+		if (ext->data[i][i]==0)
+			return 1;
 		// teraz od każdego wiersza odejmujemy górny przemnożony przez
 		// odpowiednią wartość
-<<<<<<< HEAD
 		for (ir=i+1; ir<ext->r; ir++){
 			coeff = ext->data[ir][i]/ext->data[i][i];
 			for (ic=0; ic<ext->c; ic++)
 				tmp[ic]=ext->data[i][ic]*coeff;
 			for (ic=i; ic<ext->c; ic++)
 				ext->data[ir][ic]-=tmp[ic];
-=======
-		if (ext->data[i][i]==0)
-			return 1;
-		else {
-			double subtract;
-			for (ir=i+1; ir<ext->r; ir++){
-				subtract=ext->data[ir][i];
-				for (ic=i; ic<ext->c; ic++){
-					ext->data[ir][ic]-=subtract;
-				}
-			}
->>>>>>> gauss
 		}
 		free(tmp);
 	}
