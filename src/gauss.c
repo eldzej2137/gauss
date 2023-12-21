@@ -11,6 +11,7 @@ int eliminate(Matrix *mat, Matrix *b){
   	 * Tutaj należy umieścić właściwą implemntację.
 		 */
 	int ir,ic,i;
+	double coeff;
 	// tworzymy macierz rozszerzoną
 	Matrix *ext = createMatrix(mat->r, mat->c+1);
 	for (ir=0; ir<mat->r; ir++){
@@ -36,17 +37,16 @@ int eliminate(Matrix *mat, Matrix *b){
 				ext->data[max_abs_index][ic]=tmp[ic];
 			}
 		}
-		free(tmp);
 		// teraz od każdego wiersza odejmujemy górny przemnożony przez
 		// odpowiednią wartość
 		for (ir=i+1; ir<ext->r; ir++){
-			for (ic=i; ic<ext->c; ic++){
-				if (ext->data[i][i]!=0)
-					ext->data[ir][ic]-=ext->data[i][ic]*ext->data[ir][i]/ext->data[i][i];
-				else
-					return 1;
-			}
+			coeff = ext->data[ir][i]/ext->data[i][i];
+			for (ic=0; ic<ext->c; ic++)
+				tmp[ic]=ext->data[i][ic]*coeff;
+			for (ic=i; ic<ext->c; ic++)
+				ext->data[ir][ic]-=tmp[ic];
 		}
+		free(tmp);
 	}
 	// teraz zamieniamy wartości w macierzach wejściowych (mat, b)
 	for (ir=0; ir<mat->r; ir++){
